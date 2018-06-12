@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <script type="text/javascript" th:src="@{https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js}"></script>
+        <link th:href="@{https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet"/>
+        <link th:href="@{/css/default.css}" rel="stylesheet"/>
+        <link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon"/>
+        <meta charset="UTF-8"/>
+        <title>伤害列表</title>
+    </head>
+
+    <body>
+
+        <div class="contentDiv">
+
+
+
+            <table class="table table-hover table-condensed">
+                <legend>
+                    <strong>伤害列表</strong>
+                </legend>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>名字</th>
+                        <th>承受者</th>
+                        <th>类型</th>
+                        <th>输出量</th>
+                        <th>抗性</th>
+                        <th>穿透</th>
+                        <th>最终伤害</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr th:each="damage : ${damageList}">
+                    <th scope="row" th:text="${damage.id}"></th>
+                    <td><a th:href="@{/damage/update/{damageId}(damageId=${damage.id})}" th:text="${damage.name}"></a></td>
+                    <td th:text="${damage.sufferer}"></td>
+                    <td th:text="${damage.type}"></td>
+                    <td th:text="${damage.count}"></td>
+                    <td th:text="${damage.resistance}"></td>
+                    <td th:text="${damage.penetration}"></td>
+                    <td th:text="${damage.finalDamage}"></td>
+                    <td><a class="btn btn-danger" th:href="@{/damage/delete/{damageId}(damageId=${damage.id})}">删除</a></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div><a class="btn btn-primary" href="/damage/create"   role="button">创建伤害信息</a></div>
+        </div>
+
+    </body>
+</html>

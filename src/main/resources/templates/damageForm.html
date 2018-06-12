@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script type="text/javascript" th:src="@{https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js}"></script>
+    <link th:href="@{https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js}" rel="script"/>
+    <link th:href="@{/css/default.css}" rel="stylesheet"/>
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon"/>
+    <meta charset="UTF-8"/>
+    <title >伤害记录</title>
+</head>
+
+
+
+<body>
+<div class="contentDiv">
+
+    <h1 id="window-title" th:text="${action}"></h1>
+
+
+
+     <form th:action="@{/damage/{action}(action=${action})}" method="post" class="form-horizontal">
+         <input type="hidden" name="id" th:value="${damage.id}"/>
+
+         <div class="form-group">
+             <label for="damage_name" class="col-sm-2 control-label">名字:</label>
+             <div class="col-xs-4">
+                 <input type="text" class="form-control" id="damage_name" name="name" th:value="${damage.name}" th:field="*{damage.name}" />
+             </div>
+             <label class="col-sm-2 control-label text-danger" th:if="${#fields.hasErrors('damage.name')}" th:errors="*{damage.name}">姓名有误!</label>
+         </div>
+
+         <div class="form-group">
+             <label for="damage_sufferer" class="col-sm-2 control-label">承受者:</label>
+             <div class="col-xs-4">
+                 <input type="text" class="form-control" id="damage_sufferer" name="sufferer" th:value="${damage.sufferer}" th:field="*{damage.sufferer}" />
+             </div>
+             <label class="col-sm-2 control-label text-danger" th:if="${#fields.hasErrors('damage.sufferer')}" th:errors="*{damage.sufferer}"></label>
+         </div>
+
+
+         <select class="form-group" name="type">
+             <option value="物理">物理伤害</option>
+             <option value="魔法" th:field="*{damage.type}">魔法伤害</option>
+         </select>
+
+
+
+
+
+         <div class="form-group">
+             <label for="damage_count" class="col-sm-2 control-label">伤害量:</label>
+             <div class="col-xs-4">
+                 <input      class="form-control" id="damage_count" name="count" th:value="${damage.count}" th:field="*{damage.count}"/>
+             </div>
+             <label class="col-sm-2 control-label text-danger" th:if="${#fields.hasErrors('damage.count')}" th:errors="*{damage.count}"></label>
+         </div>
+
+         <div class="form-group">
+             <label for="damage_resistance" class="col-sm-2 control-label">抗性:</label>
+             <div class="col-xs-4">
+                 <input   class="form-control" id="damage_resistance" name="resistance" th:value="${damage.resistance}" th:field="*{damage.resistance}"/>
+             </div>
+             <label class="col-sm-2 control-label text-danger" th:if="${#fields.hasErrors('damage.resistance')}" th:errors="*{damage.resistance}"></label>
+         </div>
+
+         <div class="form-group">
+             <label for="damage_penetration" class="col-sm-2 control-label">穿透:</label>
+             <div class="col-xs-4">
+                 <input  class="form-control" id="damage_penetration" name="penetration" th:value="${damage.penetration}" th:field="*{damage.penetration}"/>
+             </div>
+             <label class="col-sm-2 control-label text-danger" th:if="${#fields.hasErrors('damage.penetration')}" th:errors="*{damage.penetration}"></label>
+         </div>
+
+
+         <div class="form-group">
+             <div class="col-sm-offset-2 col-sm-10">
+                 <input class="btn btn-primary" type="submit" value="提交"/>&nbsp;&nbsp;
+                 <input class="btn" type="button" value="返回" onclick="history.back()"/>
+             </div>
+         </div>
+             
+     </form>
+</div>
+
+</body>
